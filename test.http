@@ -1,0 +1,105 @@
+### Variables
+@host = http://localhost:4004/odata/v4/catalog
+
+###* Products
+# Get all products
+GET {{host}}/Products
+###
+# Get single product
+GET {{host}}/Products('ROSE-RED')
+
+###* Customers
+# Get all customers
+GET {{host}}/Customers
+###
+# Get single customer
+GET {{host}}/Customers('CUST-001')
+###
+# Create new customer
+POST {{host}}/Customers
+Content-Type: application/json
+
+{
+    "ID": "CUST-007",
+    "name": "Mordor Gardens",
+    "contact": "+1-555-0007"
+}
+
+###* Orders
+# Get all orders with customer and items
+GET {{host}}/Orders?$expand=customer,items
+###
+# Get single order with full details
+GET {{host}}/Orders('ORD-2024-001')?$expand=customer,items($expand=product)
+###
+# Create new order
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+    "orderNumber": "ORD-2024-002",
+    "orderDate": "2024-03-21",
+    "status": "NEW",
+    "totalAmount": 15000.00,
+    "customer_ID": "CUST-002",
+    "items": [
+        {
+            "product_ID": "ROSE-RED",
+            "quantity": 10,
+            "pricePerPallet": 1000.00,
+            "subtotal": 10000.00
+        },
+        {
+            "product_ID": "LILY-WHITE",
+            "quantity": 5,
+            "pricePerPallet": 1000.00,
+            "subtotal": 5000.00
+        }
+    ]
+}
+
+###* Deliveries
+# Get all deliveries with order details
+GET {{host}}/Deliveries?$expand=order($expand=items($expand=product),customer)
+###
+# Get single delivery
+GET {{host}}/Deliveries('DEL-2024-001')
+###
+# Create new delivery
+POST {{host}}/Deliveries
+Content-Type: application/json
+
+{
+    "deliveryNumber": "DEL-2024-002",
+    "order_orderNumber": "ORD-2024-001",
+    "status": "IN_PROCESS"
+}
+
+###* Invoices
+# Get all invoices with order details
+GET {{host}}/Invoices?$expand=order($expand=customer)
+###
+# Create new invoice
+POST {{host}}/Invoices
+Content-Type: application/json
+
+{
+    "invoiceNumber": "INV-2024-002",
+    "order_orderNumber": "ORD-2024-001",
+    "amount": 15000.00,
+    "issueDate": "2024-03-21",
+    "status": "ISSUED"
+}
+
+###* Advanced Queries
+# Filter orders by total amount
+GET {{host}}/Orders?$filter=totalAmount gt 20000&$expand=customer,items
+###
+# Sort products by price
+GET {{host}}/Products?$orderby=pricePerPallet desc
+###
+# Count orders
+GET {{host}}/Orders/$count
+###
+# Select specific fields
+GET {{host}}/Orders?$select=orderNumber,orderDate,totalAmount&$expand=customer($select=name)
