@@ -103,3 +103,87 @@ GET {{host}}/Orders/$count
 ###
 # Select specific fields
 GET {{host}}/Orders?$select=orderNumber,orderDate,totalAmount&$expand=customer($select=name)
+
+### * Stock Validation Tests
+
+### 1. Create Order - Success Case (Sufficient Stock)
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+    "orderNumber": "ORD-2024-002",
+    "orderDate": "2024-12-12",
+    "status": "NEW",
+    "totalAmount": 7000.00,
+    "customer_ID": "CUST-001",
+    "items": [
+        {
+            "product_ID": "ROSE-RED",
+            "quantity": 5,
+            "pricePerPallet": 1000.00,
+            "subtotal": 5000.00
+        },
+        {
+            "product_ID": "LILY-WHITE",
+            "quantity": 2,
+            "pricePerPallet": 1000.00,
+            "subtotal": 2000.00
+        }
+    ]
+}
+
+### 2. Create Order - Failure: Insufficient Stock
+# Should fail (stock is 500)
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+    "orderNumber": "ORD-2024-004",
+    "orderDate": "2024-03-21",
+    "status": "NEW",
+    "totalAmount": 501000.00,
+    "customer_ID": "CUST-001",
+    "items": [
+        {
+            "product_ID": "ROSE-RED",
+            "quantity": 501,
+            "pricePerPallet": 1000.00,
+            "subtotal": 501000.00
+        }
+    ]
+}
+
+### 3. Create Order - Failure: Product Not Found
+# Should fail (product doesn't exist)
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+    "orderNumber": "ORD-2024-005",
+    "orderDate": "2024-03-21",
+    "status": "NEW",
+    "totalAmount": 5000.00,
+    "customer_ID": "CUST-001",
+    "items": [
+        {
+            "product_ID": "NONEXISTENT-PRODUCT",
+            "quantity": 5,
+            "pricePerPallet": 1000.00,
+            "subtotal": 5000.00
+        }
+    ]
+}
+
+### 4. Create Order - Failure: Empty Items Array
+# Should fail (no items)
+POST {{host}}/Orders
+Content-Type: application/json
+
+{
+    "orderNumber": "ORD-2024-006",
+    "orderDate": "2024-03-21",
+    "status": "NEW",
+    "totalAmount": 0.00,
+    "customer_ID": "CUST-001",
+    "items": []
+}
