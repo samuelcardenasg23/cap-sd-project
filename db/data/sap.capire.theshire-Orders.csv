@@ -1,0 +1,2 @@
+orderNumber,orderDate,status,totalAmount,customer_ID,createdAt,createdBy,modifiedAt,modifiedBy
+ORD-2024-001,2024-03-20,NEW,28000.00,CUST-001,2024-03-20,admin,2024-03-20,admin

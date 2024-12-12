@@ -32,7 +32,8 @@ entity Orders : managed {
         status      : Status default 'NEW';
         totalAmount : Decimal(10, 2);
         customer    : Composition of one Customers;
-        items       : Composition of many OrderItems;
+        items       : Composition of many OrderItems
+                          on items.order = $self;
 }
 
 // Customer basic info
@@ -46,21 +47,20 @@ entity Customers : managed {
 entity OrderItems : cuid, managed {
     order          : Association to Orders;
     product        : Association to Products;
-    quantity       : Integer; // in pallets
+    quantity       : Integer;
     pricePerPallet : Decimal(10, 2);
     subtotal       : Decimal(10, 2);
 }
 
 // Delivery tracking
 entity Deliveries : managed {
-    key deliveryNumber   : String;
-        order            : Association to Orders;
-        status           : String enum {
+    key deliveryNumber : String;
+        order          : Association to Orders;
+        status         : String enum {
             IN_PROCESS;
             SHIPPED;
         };
-        loadingStartTime : Timestamp;
-        loadingEndTime   : Timestamp;
+        shippedAt      : Timestamp; // Single timestamp for shipping event
 }
 
 // Invoice

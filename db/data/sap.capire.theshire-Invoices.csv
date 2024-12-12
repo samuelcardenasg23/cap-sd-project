@@ -1,0 +1,2 @@
+invoiceNumber,order_orderNumber,amount,issueDate,status,createdAt,createdBy,modifiedAt,modifiedBy
+INV-2024-001,ORD-2024-001,28000.00,2024-03-20,ISSUED,2024-03-20,admin,2024-03-20,admin

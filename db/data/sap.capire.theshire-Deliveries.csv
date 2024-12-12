@@ -1,0 +1,2 @@
+deliveryNumber,order_orderNumber,status,shippedAt,createdAt,createdBy,modifiedAt,modifiedBy
+DEL-2024-001,ORD-2024-001,SHIPPED,2024-03-20T15:30:00Z,2024-03-20,admin,2024-03-20,admin

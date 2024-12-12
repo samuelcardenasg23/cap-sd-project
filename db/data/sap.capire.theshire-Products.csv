@@ -1,0 +1,7 @@
+ID,name,unitOfMeasure,boxesPerPallet,stemsPerBox,pricePerPallet,stockQuantity,createdAt,createdBy,modifiedAt,modifiedBy
+ROSE-RED,Red Roses Premium,Pallet,30,10,1000.00,500,2024-01-01,admin,2024-01-01,admin
+ROSE-WHITE,White Roses Premium,Pallet,30,10,1200.00,300,2024-01-01,admin,2024-01-01,admin
+LILY-WHITE,White Lilies,Pallet,30,12,1500.00,200,2024-01-01,admin,2024-01-01,admin
+CARN-MIX,Mixed Carnations,Pallet,30,15,800.00,400,2024-01-01,admin,2024-01-01,admin
+CHRYS-YEL,Yellow Chrysanthemums,Pallet,30,12,900.00,350,2024-01-01,admin,2024-01-01,admin
+TULIP-MIX,Mixed Tulips,Pallet,30,20,1100.00,250,2024-01-01,admin,2024-01-01,admin

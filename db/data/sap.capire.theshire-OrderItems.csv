@@ -1,0 +1,4 @@
+ID,order_orderNumber,product_ID,quantity,pricePerPallet,subtotal,createdAt,createdBy,modifiedAt,modifiedBy
+d5157979-2d38-4c4d-8c91-1c4d06b89e2d,ORD-2024-001,ROSE-RED,10,1000.00,10000.00,2024-03-20,admin,2024-03-20,admin
+7a39e89b-d9d8-4ac5-95a7-45a2e5c41c6f,ORD-2024-001,LILY-WHITE,8,1500.00,12000.00,2024-03-20,admin,2024-03-20,admin
+c2e3a8d1-f6b7-4e9c-ae0d-3b9c12f8e5a4,ORD-2024-001,CHRYS-YEL,6,900.00,6000.00,2024-03-20,admin,2024-03-20,admin
